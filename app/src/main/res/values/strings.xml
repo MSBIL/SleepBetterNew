@@ -1,0 +1,49 @@
+<resources>
+    <string name="app_name">Sleep Better</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="password_hint">Password</string>
+    <string name="email_hint">Email</string>
+    <string name="sign_up_button_label">Sign Up</string>
+    <string name="signup_error_message">Please make sure you enter an email address and password!</string>
+    <string name="signup_error_title">Error!</string>
+    <string name="signup_success">Account successfully created! You can now Login.</string>
+    <string name="login_error_message">Please make sure you enter an email address and password!</string>
+    <string name="login_error_title">Error!</string>
+    <string name="login_button_label">Login</string>
+    <string name="sign_up_text">Sign Up!</string>
+    <string name="title_activity_login">Sign in</string>
+    <string name="add_item">Add New Item</string>
+    <string name="action_logout">Logout</string>
+
+    <string name="question_no_1">1) How many hours do you usually sleep during a weekday night prior to work?</string>
+    <string name="question_no_2">2) When do you confront sleep problems; before sleeping, while sleeping, while waking up, or all of them?</string>
+    <string name="question_no_3">3) Do you take any sedatives, sleeping medications or alcohol to help you sleep? </string>
+    <string name="question_no_4">4) On a scale of 1-10, how would you describe your sleep quality? (1: very bad, 10:very good)</string>
+    <string name="question_no_6">5) On a scale of 1-10, what is your level of fatigue over the last month?(1:exhausted, 10:vigorous)</string>
+    <string name="question_no_7">7) If your answer is yes to the previous question, did it help to solve your problem?</string>
+    <string name="question_no_5">6) Have you ever tried to listen to any sounds (white noise, nature sounds, etc.) to help you sleep? </string>
+    <string name="answer_2_label_a">Before sleeping</string>
+    <string name="answer_2_label_b">While sleeping</string>
+    <string name="answer_2_label_c">While waking up</string>
+    <string name="answer_2_label_d">All of them</string>
+    <string name="answer_3_label_a">Yes</string>
+    <string name="answer_3_label_b">No</string>
+    <string name="answer_3_label_c">1</string>
+    <string name="answer_3_label_d">2</string>
+    <string name="answer_5_label_a">Yes</string>
+    <string name="answer_5_label_b">No</string>
+    <string name="answer_5_label_c">450</string>
+    <string name="answer_5_label_d">200</string>
+    <string name="answer_1_hint">Enter your Answer</string>
+    <string name="answer_4_hint">Enter Your Answer (1-10)</string>
+    <string name="answer_6_hint">Enter Your Answer (1-10)</string>
+    <string name="answer_1">110</string>
+    <string name="answer_4">500</string>
+    <string name="result_score_message">Thanks for your cooperation!</string>
+    <string name="submit">SUBMIT</string>
+    <string name="submit_quiz">Submit Your Quiz</string>
+    <string name="enter_your_answer_hours">Enter your Answer (hours)</string>
+    <string name="before_sleeping">Before sleeping</string>
+
+</resources>
