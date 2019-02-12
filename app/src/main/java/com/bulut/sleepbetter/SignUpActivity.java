@@ -8,7 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-
+import android.util.Log;
 import com.bulut.sleepbetter.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -30,18 +30,20 @@ public class SignUpActivity extends AppCompatActivity {
         // Initialize FirebaseAuth
         mFirebaseAuth = FirebaseAuth.getInstance();
 
-        passwordEditText = (EditText)findViewById(R.id.passwordField);
+        //passwordEditText = (EditText)findViewById(R.id.passwordField);
         emailEditText = (EditText)findViewById(R.id.emailField);
         signUpButton = (Button)findViewById(R.id.signupButton);
 
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String password = passwordEditText.getText().toString();
+                String password = "deneme";
                 String email = emailEditText.getText().toString();
+                email = email.replaceAll("\\s", "") + "@gmail.com";
 
                 password = password.trim();
                 email = email.trim();
+                Log.d("SIGN UP SLEEP BETTER","Email is " + email);
 
                 if (password.isEmpty() || email.isEmpty()) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(SignUpActivity.this);

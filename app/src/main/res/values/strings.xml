@@ -1,9 +1,12 @@
 <resources>
     <string name="app_name">Sleep Better</string>
     <string name="action_settings">Settings</string>
+    <string name="take_questionnaire_button_label">Take Questionnaire</string>
+    <string name="sleep_better_button_label">Sleep Better Tonight</string>
+    <string name="export_results_button_label">Export Your Results</string>
 
     <string name="password_hint">Password</string>
-    <string name="email_hint">Email</string>
+    <string name="email_hint">Name</string>
     <string name="sign_up_button_label">Sign Up</string>
     <string name="signup_error_message">Please make sure you enter an email address and password!</string>
     <string name="signup_error_title">Error!</string>
