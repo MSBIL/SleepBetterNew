@@ -98,7 +98,8 @@ public class MainPageActivity extends AppCompatActivity {
                         answerOneEditText.getText().toString());
                         */
                 mDatabase.child("users").child(mUserId).child("items").push().setValue(item);
-                setContentView(R.layout.activity_main_page_no_ques);
+                reloadpage(false);
+                //setContentView(R.layout.activity_main_page_no_ques);
                 //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
                 //setSupportActionBar(toolbar);
 
@@ -108,12 +109,80 @@ public class MainPageActivity extends AppCompatActivity {
 
     }
 
+    private void reloadpage(boolean addQuest){
+        if (addQuest)
+            setContentView(R.layout.activity_main_page);
+        else
+            setContentView(R.layout.activity_main_page_no_ques);
+        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbar);
+
+        // Initialize Firebase Auth and Database Reference
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        mFirebaseUser = mFirebaseAuth.getCurrentUser();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        if (mFirebaseUser == null) {
+            // Not logged in, launch the Log In activity
+            loadLogInView();
+        } else {
+            if (addQuest){
+                questionnaireButton = (Button) findViewById(R.id.questionnaireButton);
+                questionnaireButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Log.d(TAG, "Loading questionnaire");
+                        loadquest();
+                    }
+                });
+
+            }
+
+            sleepbetterButton = (Button) findViewById(R.id.sleepbetterButton);
+            exportResultsButton = (Button) findViewById(R.id.exportResultsButton);
+            logoutButton = (Button) findViewById(R.id.logoutButton);
+
+            sleepbetterButton = (Button) findViewById(R.id.sleepbetterButton);
+            sleepbetterButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d(TAG, "Loading sleep better");
+                    loadsleepbetter();
+
+                }
+            });
+
+
+            exportResultsButton = (Button) findViewById(R.id.exportResultsButton);
+            exportResultsButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d(TAG, "Loading export results");
+                    loadexportresults();
+
+                }
+            });
+
+            logoutButton = (Button) findViewById(R.id.logoutButton);
+            logoutButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d(TAG, "Logging out");
+                    logout();
+                }
+            });
+
+        }
+
+    }
+
     private void loadsleepbetter(){
         if (mFirebaseUser == null) {
             // Not logged in, launch the Log In activity
             loadLogInView();
         } else {
-            setContentView(R.layout.activity_main_page);
+            //setContentView(R.layout.activity_main_page);
+            reloadpage(false);
         }
 
     }
@@ -124,7 +193,9 @@ public class MainPageActivity extends AppCompatActivity {
             // Not logged in, launch the Log In activity
             loadLogInView();
         } else {
-            setContentView(R.layout.activity_main_page);
+            reloadpage(false);
+
+
         }
     }
 
@@ -132,7 +203,7 @@ public class MainPageActivity extends AppCompatActivity {
 
         mFirebaseAuth.signOut();
         loadLogInView();
-        setContentView(R.layout.activity_main_page);
+        reloadpage(true);
     }
 
 
@@ -172,7 +243,6 @@ public class MainPageActivity extends AppCompatActivity {
             });
 
             sleepbetterButton = (Button) findViewById(R.id.sleepbetterButton);
-
             sleepbetterButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
