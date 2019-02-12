@@ -14,7 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-
+import android.util.Log;
 import com.bulut.sleepbetter.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -28,12 +28,17 @@ public class MainPageActivity extends AppCompatActivity {
 
     protected EditText passwordEditText;
     protected EditText emailEditText;
-    protected Button signUpButton;
+    protected Button sleepbetterButton;
+    protected Button questionnaireButton;
+    protected Button exportResultsButton;
+    protected Button logoutButton;
 
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
     private DatabaseReference mDatabase;
     private String mUserId;
+
+    private final String TAG = "SLEEP BETTER MAIN";
     TextView ques_1, ques_2, ques_3, ques_4, ques_5, ques_6;
     EditText answerOneEditText;
     RadioGroup answerTwoRadioGroup;
@@ -93,22 +98,50 @@ public class MainPageActivity extends AppCompatActivity {
                         answerOneEditText.getText().toString());
                         */
                 mDatabase.child("users").child(mUserId).child("items").push().setValue(item);
+                setContentView(R.layout.activity_main_page_no_ques);
+                //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+                //setSupportActionBar(toolbar);
+
             }
         });
 
-    }
-
-    private void loadQuestionnaire() {
-
 
     }
+
+    private void loadsleepbetter(){
+        if (mFirebaseUser == null) {
+            // Not logged in, launch the Log In activity
+            loadLogInView();
+        } else {
+            setContentView(R.layout.activity_main_page);
+        }
+
+    }
+
+    private void loadexportresults(){
+
+        if (mFirebaseUser == null) {
+            // Not logged in, launch the Log In activity
+            loadLogInView();
+        } else {
+            setContentView(R.layout.activity_main_page);
+        }
+    }
+
+    private void logout(){
+
+        mFirebaseAuth.signOut();
+        loadLogInView();
+        setContentView(R.layout.activity_main_page);
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbar);
 
         // Initialize Firebase Auth and Database Reference
         mFirebaseAuth = FirebaseAuth.getInstance();
@@ -119,9 +152,12 @@ public class MainPageActivity extends AppCompatActivity {
             // Not logged in, launch the Log In activity
             loadLogInView();
         } else {
-            signUpButton = (Button) findViewById(R.id.questionnaireButton);
+            questionnaireButton = (Button) findViewById(R.id.questionnaireButton);
+            sleepbetterButton = (Button) findViewById(R.id.sleepbetterButton);
+            exportResultsButton = (Button) findViewById(R.id.exportResultsButton);
+            logoutButton = (Button) findViewById(R.id.logoutButton);
 
-            signUpButton.setOnClickListener(new View.OnClickListener() {
+            questionnaireButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     /*
@@ -130,7 +166,39 @@ public class MainPageActivity extends AppCompatActivity {
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                     */
+                    Log.d(TAG, "Loading questionnaire");
                     loadquest();
+                }
+            });
+
+            sleepbetterButton = (Button) findViewById(R.id.sleepbetterButton);
+
+            sleepbetterButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d(TAG, "Loading sleep better");
+                    loadsleepbetter();
+
+                }
+            });
+
+
+            exportResultsButton = (Button) findViewById(R.id.exportResultsButton);
+            exportResultsButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d(TAG, "Loading export results");
+                    loadexportresults();
+
+                }
+            });
+
+            logoutButton = (Button) findViewById(R.id.logoutButton);
+            logoutButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d(TAG, "Logging out");
+                    logout();
                 }
             });
 
@@ -155,6 +223,8 @@ public class MainPageActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

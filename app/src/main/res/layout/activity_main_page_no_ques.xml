@@ -51,18 +51,9 @@
     -->
 
     <Button
-        android:id="@+id/questionnaireButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:text="@string/take_questionnaire_button_label" />
-
-    <Button
         android:id="@+id/sleepbetterButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/questionnaireButton"
-        android:layout_below="@+id/questionnaireButton"
         android:text="@string/sleep_better_button_label" />
 
     <Button

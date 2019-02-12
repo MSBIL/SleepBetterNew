@@ -4,6 +4,7 @@
     <string name="take_questionnaire_button_label">Take Questionnaire</string>
     <string name="sleep_better_button_label">Sleep Better Tonight</string>
     <string name="export_results_button_label">Export Your Results</string>
+    <string name="logout_button_label">LogOut</string>
 
     <string name="password_hint">Password</string>
     <string name="email_hint">Name</string>
