@@ -8,7 +8,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainPageActivity" >
-
+    <!--
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,10 +20,10 @@
             android:layout_height="?attr/actionBarSize"
             android:layout_gravity="bottom|end"
             android:background="?attr/colorPrimary"
-            android:visibility="invisible" />
+            android:visibility="visible" />
 
     </android.support.design.widget.AppBarLayout>
-
+    -->
     <!--
     <EditText
         android:id="@+id/passwordField"
@@ -54,8 +54,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_gravity="center"
-        android:layout_marginLeft="89dp"
         android:text="@string/take_questionnaire_button_label" />
 
     <Button
