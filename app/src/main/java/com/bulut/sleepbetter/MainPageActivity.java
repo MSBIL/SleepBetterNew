@@ -24,6 +24,22 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import com.bulut.sleepbetter.database.YouTubeSqlDb;
+import com.bulut.sleepbetter.fragments.FavoritesFragment;
+import com.bulut.sleepbetter.fragments.PlaylistsFragment;
+import com.bulut.sleepbetter.fragments.RecentlyWatchedFragment;
+import com.bulut.sleepbetter.fragments.SearchFragment;
+import com.bulut.sleepbetter.interfaces.OnFavoritesSelected;
+import com.bulut.sleepbetter.interfaces.OnItemSelected;
+import com.bulut.sleepbetter.model.ItemType;
+import com.bulut.sleepbetter.model.YouTubeVideo;
+import com.bulut.sleepbetter.utils.Config;
+import com.bulut.sleepbetter.utils.NetworkConf;
+import com.bulut.sleepbetter.youtube.SuggestionsLoader;
+
+import pub.devrel.easypermissions.AfterPermissionGranted;
+import pub.devrel.easypermissions.EasyPermissions;
+
 public class MainPageActivity extends AppCompatActivity {
 
     protected EditText passwordEditText;
@@ -37,6 +53,24 @@ public class MainPageActivity extends AppCompatActivity {
     private FirebaseUser mFirebaseUser;
     private DatabaseReference mDatabase;
     private String mUserId;
+
+    private static final int PERMISSIONS = 1;
+    private static final String PREF_BACKGROUND_COLOR = "BACKGROUND_COLOR";
+    private static final String PREF_TEXT_COLOR = "TEXT_COLOR";
+    public static final String PREF_ACCOUNT_NAME = "accountName";
+
+    static final int REQUEST_ACCOUNT_PICKER = 1000;
+    static final int REQUEST_PERMISSION_GET_ACCOUNTS = 1003;
+
+    private int initialColor = 0xffff0040;
+    private int initialColors[] = new int[2];
+
+    private SearchFragment searchFragment;
+    private RecentlyWatchedFragment recentlyPlayedFragment;
+    private FavoritesFragment favoritesFragment;
+
+    private NetworkConf networkConf;
+
 
     private final String TAG = "SLEEP BETTER MAIN";
     TextView ques_1, ques_2, ques_3, ques_4, ques_5, ques_6;

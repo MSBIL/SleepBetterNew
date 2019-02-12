@@ -122,7 +122,7 @@ interface IIdleCallback
 public class BackgroundAudioService extends Service implements MediaPlayer.OnCompletionListener,
 	MediaPlayer.OnPreparedListener {
 
-	private static final String TAG = "DEEP SLEEP service";
+	private static final String TAG = "SLEEP BETTER service";
 
 	public static final String ACTION_PLAY = "action_play";
 	public static final String ACTION_PAUSE = "action_pause";

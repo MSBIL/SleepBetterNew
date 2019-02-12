@@ -88,5 +88,12 @@
     <string name="failed_playback">Playback failed!</string>
     <string name="list_empty">List is empty!</string>
 
+    <string name="ROCK_LIST">https://www.youtube.com/watch?v=hBDrBW1XI48</string>
+    <string name="POP_LIST">https://www.youtube.com/watch?v=NLWqz0TI35o</string>
+    <string name="METAL_LIST">https://www.youtube.com/watch?v=BxDiQhNO780</string>
+    <string name="CLASSICAL_LIST">https://www.youtube.com/watch?v=4VjN9C7VZFw</string>
+    <string name="PIANO_LIST">https://www.youtube.com/watch?v=mYMtxCGqty4</string>
+    <string name="ELECTRONICAL_LIST">https://www.youtube.com/watch?v=GGY6zizgrYw</string>
+
 
 </resources>
