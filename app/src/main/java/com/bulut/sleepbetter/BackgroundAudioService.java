@@ -66,52 +66,6 @@ import android.os.Binder;
 import java.util.Timer;
 import java.util.TimerTask;
 
-class IdleTimer
-{
-    private Boolean isTimerRunning;
-    private IIdleCallback idleCallback;
-    private int maxIdleTime;
-    private Timer timer;
-
-    public IdleTimer(int maxInactivityTime, IIdleCallback callback)
-    {
-        maxIdleTime = maxInactivityTime;
-        idleCallback = callback;
-    }
-    public void startIdleTimer()
-    {
-        timer = new Timer();
-        timer.schedule(new TimerTask() {
-
-            @Override
-            public void run() {
-                idleCallback.inactivityDetected();
-            }
-        }, maxIdleTime);
-        isTimerRunning = true;
-    }
-    public void restartIdleTimer()
-    {
-        stopIdleTimer();
-        startIdleTimer();
-    }
-    public void stopIdleTimer()
-    {
-        timer.cancel();
-        isTimerRunning = false;
-    }
-    public boolean checkIsTimerRunning()
-    {
-        return isTimerRunning;
-    }
-}
-
-
-interface IIdleCallback
-{
-	public void inactivityDetected();
-}
-
 
 
 
@@ -148,7 +102,6 @@ public class BackgroundAudioService extends Service implements MediaPlayer.OnCom
 
 	private DeviceBandwidthSampler deviceBandwidthSampler;
 	private ConnectionQuality connectionQuality = ConnectionQuality.MODERATE;
-	private IdleTimer idleTimer;
 	@Override
 	public IBinder onBind(Intent intent) {
 		return null;
@@ -163,7 +116,7 @@ public class BackgroundAudioService extends Service implements MediaPlayer.OnCom
 		mMediaPlayer.setOnPreparedListener(this);
 		initMediaSessions();
         //initTimeOutService();
-
+        Log.d(TAG, "Started background service");
 		/*
 		idleTimer = new IdleTimer(10000, new IIdleCallback() {
 			@Override
@@ -236,7 +189,7 @@ public class BackgroundAudioService extends Service implements MediaPlayer.OnCom
 				mediaType = ItemType.YOUTUBE_MEDIA_TYPE_VIDEO;
 				videoItem = (YouTubeVideo) intent.getSerializableExtra(Config.YOUTUBE_TYPE_VIDEO);
 				if (videoItem.getId() != null) {
-					Log.d(TAG, "Playing video");
+					Log.d(TAG, "Playing video " + videoItem.getId());
 					playVideo();
 				}
 				break;

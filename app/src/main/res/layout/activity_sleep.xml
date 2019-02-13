@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/activity_vertical_margin"
+                tools:context=".MainPageActivity" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/minuteTextView"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+
+
+            android:layout_marginTop="10dip"
+            android:text="Time set:"/>
+
+
+        <Spinner
+            android:id="@+id/spinner_minute"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/time_arrays"
+            android:prompt="@string/spinner1_title"/>
+
+        <TextView
+            android:id="@+id/musicTextView"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="10dip"
+            android:text="Select Music"/>
+
+        <Spinner
+            android:id="@+id/spinner_music"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/music_arrays"
+            android:prompt="@string/spinner2_title"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/playmusicButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/playmusic_button"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</RelativeLayout>
