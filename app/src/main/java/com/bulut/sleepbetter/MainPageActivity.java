@@ -303,15 +303,8 @@ public class MainPageActivity extends AppCompatActivity implements EasyPermissio
         answerSevenRadioGroup = (RadioGroup) findViewById(R.id.radio_group_answer_7);
 
 
-        String answer_two = "";
 
-        for(int i=0; i<answerTwoRadioGroup.getChildCount(); i++) {
-            RadioButton btn = (RadioButton) answerTwoRadioGroup.getChildAt(i);
-            if(btn.getId() == answerTwoRadioGroup.getCheckedRadioButtonId()) {
-                answer_two = String.valueOf(btn.getText());
-            }
-        }
-        final String answer_two_final = answer_two;
+
 
         ques_1 = (TextView) findViewById(R.id.text_question_1);
         ques_2 = (TextView) findViewById(R.id.radio_question_2);
@@ -326,18 +319,55 @@ public class MainPageActivity extends AppCompatActivity implements EasyPermissio
 
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                String answer_two = "";
+                if(answerTwoRadioGroup.getCheckedRadioButtonId()!=-1){
+                    int id= answerTwoRadioGroup.getCheckedRadioButtonId();
+                    View radioButton = answerTwoRadioGroup.findViewById(id);
+                    int radioId = answerTwoRadioGroup.indexOfChild(radioButton);
+                    RadioButton btn = (RadioButton) answerTwoRadioGroup.getChildAt(radioId);
+                    answer_two = (String) btn.getText();
+                    Log.d(TAG, "Radio buttion id and text us" + String.valueOf(radioId) + " " + answer_two);
+                }
+
+                String answer_three = "";
+                if(answerThreeRadioGroup.getCheckedRadioButtonId()!=-1){
+                    int id= answerThreeRadioGroup.getCheckedRadioButtonId();
+                    View radioButton = answerThreeRadioGroup.findViewById(id);
+                    int radioId = answerThreeRadioGroup.indexOfChild(radioButton);
+                    RadioButton btn = (RadioButton) answerThreeRadioGroup.getChildAt(radioId);
+                    answer_three = (String) btn.getText();
+                }
+
+                String answer_six = "";
+                if(answerSixRadioGroup.getCheckedRadioButtonId()!=-1){
+                    int id= answerSixRadioGroup.getCheckedRadioButtonId();
+                    View radioButton = answerSixRadioGroup.findViewById(id);
+                    int radioId = answerSixRadioGroup.indexOfChild(radioButton);
+                    RadioButton btn = (RadioButton) answerSixRadioGroup.getChildAt(radioId);
+                    answer_six = (String) btn.getText();
+                }
+
+                String answer_seven = "";
+                if(answerSevenRadioGroup.getCheckedRadioButtonId()!=-1){
+                    int id= answerSevenRadioGroup.getCheckedRadioButtonId();
+                    View radioButton = answerSevenRadioGroup.findViewById(id);
+                    int radioId = answerSevenRadioGroup.indexOfChild(radioButton);
+                    RadioButton btn = (RadioButton) answerSevenRadioGroup.getChildAt(radioId);
+                    answer_seven = (String) btn.getText();
+                }
+
 
                 QuestionnaireItem item = new QuestionnaireItem(
                         mUserId,
                         mUserId,
                         answerOneEditText.getText().toString(),
                         //String.valueOf(answerTwoRadioGroup.getId()),
-                        answer_two_final,
-                        String.valueOf(answerThreeRadioGroup.getId()),
+                        answer_two,
+                        answer_three,
                         answerFourEditText.getText().toString(),
                         answerFiveEditText.getText().toString(),
-                        String.valueOf(answerSixRadioGroup.getId()),
-                        String.valueOf(answerSevenRadioGroup.getId())
+                        answer_six,
+                        answer_seven
                 );
                 /*
                 QuestionnaireItem item = new QuestionnaireItem(
