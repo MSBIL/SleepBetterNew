@@ -14,6 +14,26 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+
+        <TextView
+            android:id="@+id/listenmusic_text"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+
+
+            android:layout_marginTop="10dip"
+            android:text="Time set:"/>
+
+
+        <Spinner
+            android:id="@+id/spinner_listenmusic"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/time_listen"
+            android:prompt="@string/spinner0_title"/>
+
+
         <TextView
             android:id="@+id/minuteTextView"
             android:layout_width="fill_parent"

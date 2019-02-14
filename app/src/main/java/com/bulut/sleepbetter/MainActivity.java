@@ -83,7 +83,8 @@ public class MainActivity extends AppCompatActivity {
                         ques_3.toString(),
                         answerFourEditText.getText().toString(),
                         answerFiveRadioGroup.toString(),
-                        ques_6.toString()
+                        ques_6.toString(),
+                        null
                 );
                 /*
                 QuestionnaireItem item = new QuestionnaireItem(

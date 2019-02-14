@@ -20,6 +20,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -91,12 +92,14 @@ public class MainPageActivity extends AppCompatActivity implements EasyPermissio
 
 
     private final String TAG = "SLEEP BETTER MAIN";
-    TextView ques_1, ques_2, ques_3, ques_4, ques_5, ques_6;
+    TextView ques_1, ques_2, ques_3, ques_4, ques_5, ques_6, ques_7;
     EditText answerOneEditText;
     RadioGroup answerTwoRadioGroup;
-
+    RadioGroup answerThreeRadioGroup;
     EditText answerFourEditText;
-    RadioGroup answerFiveRadioGroup;
+    EditText answerFiveEditText;
+    RadioGroup answerSixRadioGroup;
+    RadioGroup answerSevenRadioGroup;
 
 
     String[] question = {
@@ -181,75 +184,73 @@ public class MainPageActivity extends AppCompatActivity implements EasyPermissio
         EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
     }
 
-    private void runSleepBetter(String music, Long length){
+    private void runSleepBetter(String listen_music, String music, Long length){
 
-        runMusic(music, length);
+        runMusic(listen_music, music, length);
 
 
     }
 
-    public void runMusic(String music, Long length) {
+    public void runMusic(String listen_music, String music, Long length) {
         if (!networkConf.isNetworkAvailable()) {
             networkConf.createNetErrorDialog();
             return;
         }
 
-        List<YouTubeVideo> playlist = new ArrayList<YouTubeVideo>();
-        String videoURL = "";
-        if (music.equals("ROCK"))
-            videoURL = getString(R.string.rock_list);
-        if (music.equals("POP"))
-            videoURL = getString(R.string.pop_list);
-        if (music.equals("METAL"))
-            videoURL = getString(R.string.metal_list);
-        if (music.equals("CLASSICAL"))
-            videoURL = getString(R.string.classical_list);
-        if (music.equals("PIANO"))
-            videoURL = getString(R.string.piano_list);
-        if (music.equals("ELECTRONICAL"))
-            videoURL = getString(R.string.electronical_list);
+        if (listen_music.equals("YES")) {
+            List<YouTubeVideo> playlist = new ArrayList<YouTubeVideo>();
+            String videoURL = "";
+            if (music.equals("ROCK"))
+                videoURL = getString(R.string.rock_list);
+            if (music.equals("POP"))
+                videoURL = getString(R.string.pop_list);
+            if (music.equals("METAL"))
+                videoURL = getString(R.string.metal_list);
+            if (music.equals("CLASSICAL"))
+                videoURL = getString(R.string.classical_list);
+            if (music.equals("PIANO"))
+                videoURL = getString(R.string.piano_list);
+            if (music.equals("ELECTRONICAL"))
+                videoURL = getString(R.string.electronical_list);
 
-        YouTubeVideo videoToPlay = new YouTubeVideo(videoURL,
-                                                    "SLEEP BETTER: " + music,
-                                                    videoURL,
-                "SLEEP BETTER: " + music,
-                "SLEEP BETTER: " + music);
+            YouTubeVideo videoToPlay = new YouTubeVideo(videoURL,
+                    "SLEEP BETTER: " + music,
+                    videoURL,
+                    "SLEEP BETTER: " + music,
+                    "SLEEP BETTER: " + music);
 
-        Log.d(TAG, "About to play url " + videoURL);
-        playlist.add(videoToPlay);
-        Intent serviceIntent = new Intent(this, BackgroundAudioService.class);
-        serviceIntent.setAction(BackgroundAudioService.ACTION_PLAY);
-        serviceIntent.putExtra(Config.YOUTUBE_TYPE, ItemType.YOUTUBE_MEDIA_TYPE_VIDEO);
-        serviceIntent.putExtra(Config.YOUTUBE_MEDIA_TYPE_VIDEO, videoToPlay);
-        //serviceIntent.putExtra(Config.YOUTUBE_TYPE_PLAYLIST_VIDEO_POS, 0);
+            Log.d(TAG, "About to play url " + videoURL);
+            playlist.add(videoToPlay);
+            Intent serviceIntent = new Intent(this, BackgroundAudioService.class);
+            serviceIntent.setAction(BackgroundAudioService.ACTION_PLAY);
+            serviceIntent.putExtra(Config.YOUTUBE_TYPE, ItemType.YOUTUBE_MEDIA_TYPE_VIDEO);
+            serviceIntent.putExtra(Config.YOUTUBE_MEDIA_TYPE_VIDEO, videoToPlay);
+            //serviceIntent.putExtra(Config.YOUTUBE_TYPE_PLAYLIST_VIDEO_POS, 0);
 
         /*
         serviceIntent.putExtra(Config.YOUTUBE_TYPE, ItemType.YOUTUBE_MEDIA_TYPE_PLAYLIST);
         serviceIntent.putExtra(Config.YOUTUBE_TYPE_PLAYLIST, (ArrayList) playlist);
         serviceIntent.putExtra(Config.YOUTUBE_TYPE_PLAYLIST_VIDEO_POS, 0);
         */
-        Log.d(TAG, "Starting play list now");
-        startService(serviceIntent);
+            Log.d(TAG, "Starting play list now");
+            startService(serviceIntent);
 
-        try
-        {
-            Thread.sleep(length*60*1000);
+            try {
+                Thread.sleep(length * 60 * 1000);
+            } catch (InterruptedException ex) {
+                Thread.currentThread().interrupt();
+            }
+
+            Log.d(TAG, "Pausing play list now");
+
+            Intent stopIntent = new Intent(this, BackgroundAudioService.class);
+            stopIntent.setAction(BackgroundAudioService.ACTION_STOP);
+            stopIntent.putExtra(Config.YOUTUBE_TYPE, ItemType.YOUTUBE_MEDIA_TYPE_PLAYLIST);
+            stopIntent.putExtra(Config.YOUTUBE_TYPE_PLAYLIST, (ArrayList) playlist);
+            stopIntent.putExtra(Config.YOUTUBE_TYPE_PLAYLIST_VIDEO_POS, 0);
+            startService(stopIntent);
+            Log.d(TAG, "Should be paused by now");
         }
-        catch(InterruptedException ex)
-        {
-            Thread.currentThread().interrupt();
-        }
-
-        Log.d(TAG, "Pausing play list now");
-
-        Intent stopIntent = new Intent(this, BackgroundAudioService.class);
-        stopIntent.setAction(BackgroundAudioService.ACTION_STOP);
-        stopIntent.putExtra(Config.YOUTUBE_TYPE, ItemType.YOUTUBE_MEDIA_TYPE_PLAYLIST);
-        stopIntent.putExtra(Config.YOUTUBE_TYPE_PLAYLIST, (ArrayList) playlist);
-        stopIntent.putExtra(Config.YOUTUBE_TYPE_PLAYLIST_VIDEO_POS, 0);
-        startService(stopIntent);
-        Log.d(TAG, "Should be paused by now");
-
 
         Log.d(TAG, "Starting sleep tracking now");
         //startSleepTracking();
@@ -260,7 +261,7 @@ public class MainPageActivity extends AppCompatActivity implements EasyPermissio
     private void startSleepTracking(){
         Intent intent = new Intent();
         intent.setAction("com.urbandroid.sleep.alarmclock.START_SLEEP_TRACK");
-        intent.putExtra("START_AIRPLANE", true);
+        //intent.putExtra("START_AIRPLANE", true);
         intent.setClassName("com.urbandroid.sleep", "com.urbandroid.sleep.alarmclock.StartTrackReceiver");
         intent.setPackage("com.urbandroid.sleep");
         sendBroadcast(intent);
@@ -268,9 +269,17 @@ public class MainPageActivity extends AppCompatActivity implements EasyPermissio
     }
 
     private void startRecordGather(){
+        //Intent intent = new Intent("com.urbandroid.sleep.addon.port.backup.BackupConnectivityService");
+        //intent.setClassName("com.urbandroid.sleep.addon.port", "com.urbandroid.sleep.addon.port.backup.BackupConnectivityService");
+        //intent.putExtra(ExportService.IS_MANUALLY_STARTED_KEY, false);
+        //intent.putExtra("TS", ts);
+        //startService(intent);
+
+
         Intent intent = new Intent();
         intent.setAction("com.urbandroid.sleep.REQUEST_SYNC");
-        intent.putExtra("START_AIRPLANE", true);
+        //intent.putExtra("START_AIRPLANE", true);
+        intent.setClassName("com.urbandroid.sleep", "com.urbandroid.sleep.REQUEST_SYNC");
         //intent.setClassName("com.urbandroid.sleep", "com.urbandroid.sleep.alarmclock.StartTrackReceiver");
         intent.setPackage("com.urbandroid.sleep");
         sendBroadcast(intent);
@@ -287,8 +296,22 @@ public class MainPageActivity extends AppCompatActivity implements EasyPermissio
 
         answerOneEditText = (EditText) findViewById(R.id.text_answer_1);
         answerTwoRadioGroup = (RadioGroup) findViewById(R.id.radio_group_answer_2);
+        answerThreeRadioGroup = (RadioGroup) findViewById(R.id.radio_group_answer_3);
         answerFourEditText = (EditText) findViewById(R.id.text_answer_4);
-        answerFiveRadioGroup = (RadioGroup) findViewById(R.id.radio_group_answer_5);
+        answerFiveEditText = (EditText) findViewById(R.id.text_answer_6);
+        answerSixRadioGroup = (RadioGroup) findViewById(R.id.radio_group_answer_5);
+        answerSevenRadioGroup = (RadioGroup) findViewById(R.id.radio_group_answer_7);
+
+
+        String answer_two = "";
+
+        for(int i=0; i<answerTwoRadioGroup.getChildCount(); i++) {
+            RadioButton btn = (RadioButton) answerTwoRadioGroup.getChildAt(i);
+            if(btn.getId() == answerTwoRadioGroup.getCheckedRadioButtonId()) {
+                answer_two = String.valueOf(btn.getText());
+            }
+        }
+        final String answer_two_final = answer_two;
 
         ques_1 = (TextView) findViewById(R.id.text_question_1);
         ques_2 = (TextView) findViewById(R.id.radio_question_2);
@@ -308,11 +331,13 @@ public class MainPageActivity extends AppCompatActivity implements EasyPermissio
                         mUserId,
                         mUserId,
                         answerOneEditText.getText().toString(),
-                        answerTwoRadioGroup.toString(),
-                        ques_3.toString(),
+                        //String.valueOf(answerTwoRadioGroup.getId()),
+                        answer_two_final,
+                        String.valueOf(answerThreeRadioGroup.getId()),
                         answerFourEditText.getText().toString(),
-                        answerFiveRadioGroup.toString(),
-                        ques_6.toString()
+                        answerFiveEditText.getText().toString(),
+                        String.valueOf(answerSixRadioGroup.getId()),
+                        String.valueOf(answerSevenRadioGroup.getId())
                 );
                 /*
                 QuestionnaireItem item = new QuestionnaireItem(
@@ -320,7 +345,7 @@ public class MainPageActivity extends AppCompatActivity implements EasyPermissio
                         mUserId,
                         answerOneEditText.getText().toString());
                         */
-                mDatabase.child("users").child(mUserId).child("items").push().setValue(item);
+                mDatabase.child("users").child(mUserId).child("questionnaire").push().setValue(item);
                 reloadpage(false);
                 //setContentView(R.layout.activity_main_page_no_ques);
                 //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -334,12 +359,14 @@ public class MainPageActivity extends AppCompatActivity implements EasyPermissio
 
     private void loadsleeptime(){
 
-        Spinner spinner1, spinner2;
+        mUserId = mFirebaseUser.getUid();
+        Spinner spinner0, spinner1, spinner2;
         Button btnSubmit;
 
         setContentView(R.layout.activity_sleep);
-
+        spinner0 = (Spinner) findViewById(R.id.spinner_listenmusic);
         spinner1 = (Spinner) findViewById(R.id.spinner_music);
+        /*
         spinner1.setOnItemSelectedListener(new OnItemSelectedListener (){
             public void onItemSelected(AdapterView<?> parent, View view, int pos,long id) {
                 Toast.makeText(parent.getContext(),
@@ -352,6 +379,7 @@ public class MainPageActivity extends AppCompatActivity implements EasyPermissio
                 // TODO Auto-generated method stub
             }
         });
+        */
         spinner2 = (Spinner) findViewById(R.id.spinner_minute);
         btnSubmit = (Button) findViewById(R.id.playmusicButton);
         btnSubmit.setOnClickListener(new OnClickListener() {
@@ -361,14 +389,21 @@ public class MainPageActivity extends AppCompatActivity implements EasyPermissio
 
                 Spinner spinner2_in = (Spinner) findViewById(R.id.spinner_minute);
                 Spinner spinner1_in = (Spinner) findViewById(R.id.spinner_music);
+                Spinner spinner0_in = (Spinner) findViewById(R.id.spinner_listenmusic);
+                String listen_music = String.valueOf(spinner0_in.getSelectedItem());
                 String music = String.valueOf(spinner1_in.getSelectedItem());
                 String str_length = String.valueOf(spinner2_in.getSelectedItem());
                 Long length = Long.parseLong(str_length);
                 Log.d(TAG, "Following items selected " +
+                        String.valueOf(spinner0_in.getSelectedItem()) + " " +
                          String.valueOf(spinner1_in.getSelectedItem()) + " " +
                         String.valueOf(spinner2_in.getSelectedItem())
                        );
-                runSleepBetter(music, length);
+
+                MusicItem item = new MusicItem(mUserId, mUserId, listen_music, music, str_length);
+                mDatabase.child("users").child(mUserId).child("sleep_better_tonight").push().setValue(item);
+
+                runSleepBetter(listen_music, music, length);
             }
 
         });
@@ -426,7 +461,8 @@ public class MainPageActivity extends AppCompatActivity implements EasyPermissio
                 @Override
                 public void onClick(View v) {
                     Log.d(TAG, "Loading export results");
-                    loadexportresults();
+                    //loadexportresults();
+                    startRecordGather();
 
 
                 }
@@ -528,7 +564,8 @@ public class MainPageActivity extends AppCompatActivity implements EasyPermissio
                 @Override
                 public void onClick(View v) {
                     Log.d(TAG, "Loading export results");
-                    loadexportresults();
+                    //loadexportresults();
+                    startRecordGather();
 
                 }
             });

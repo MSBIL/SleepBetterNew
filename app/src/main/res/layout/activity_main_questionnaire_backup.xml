@@ -16,8 +16,6 @@
         android:padding="@dimen/dimen_8">
 
 
-
-
         <LinearLayout
             android:id="@+id/qa_layout_1"
             android:layout_width="match_parent"
@@ -39,8 +37,6 @@
                 android:hint="@string/answer_1_hint"
                 android:inputType="number"
                 tools:targetApi="o"/>
-
-
         </LinearLayout>
 
         <LinearLayout

@@ -96,7 +96,7 @@
     <string name="electronical_list">GGY6zizgrYw</string>
     <string name="best_rock_list">y8OtzJtp-EM</string>
 
-
+    <string name="spinner0_title">Listen Music Tonight</string>
     <string name="spinner1_title">Music Length</string>
     <string name="spinner2_title">Music Type</string>
     <string name="playmusic_button">Play Music</string>
@@ -120,4 +120,8 @@
         <item>30</item>
     </string-array>
 
+    <string-array name="time_listen">
+        <item>YES</item>
+        <item>NO</item>
+    </string-array>
 </resources>
