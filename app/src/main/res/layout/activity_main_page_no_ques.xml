@@ -6,6 +6,7 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
+                android:background="#f5f5dc"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainPageActivity" >
 
@@ -54,6 +55,7 @@
         android:id="@+id/sleepbetterButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/border_drawable"
         android:text="@string/sleep_better_button_label" />
 
     <Button
@@ -61,14 +63,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/sleepbetterButton"
+        android:background="@drawable/border_drawable"
         android:layout_below="@+id/sleepbetterButton"
         android:text="@string/export_results_button_label" />
 
     <Button
-        android:id="@+id/logoutButton"
+        android:id="@+id/logoutButton" 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/exportResultsButton"
+        android:background="@drawable/border_drawable"
         android:layout_below="@+id/exportResultsButton"
         android:text="@string/logout_button_label" />
 

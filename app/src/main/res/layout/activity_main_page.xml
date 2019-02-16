@@ -7,6 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+                android:background="#f5f5dc"
     tools:context=".MainPageActivity" >
 
     <!--
@@ -52,10 +53,11 @@
 
     <Button
         android:id="@+id/questionnaireButton"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:text="@string/take_questionnaire_button_label" />
+        android:background="@drawable/border_drawable"
+        android:text="@string/take_questionnaire_button_label"/>
 
     <Button
         android:id="@+id/sleepbetterButton"
@@ -63,6 +65,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/questionnaireButton"
         android:layout_below="@+id/questionnaireButton"
+        android:background="@drawable/border_drawable"
         android:text="@string/sleep_better_button_label" />
 
     <Button
@@ -70,6 +73,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/sleepbetterButton"
+        android:background="@drawable/border_drawable"
         android:layout_below="@+id/sleepbetterButton"
         android:text="@string/export_results_button_label" />
 
@@ -78,7 +82,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/exportResultsButton"
+        android:background="@drawable/border_drawable"
         android:layout_below="@+id/exportResultsButton"
         android:text="@string/logout_button_label" />
+    <LinearLayout
+        android:id="@+id/TextViewLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="200px"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="34dp"
+        android:orientation="horizontal">
 
+        <TextView
+            android:id="@+id/textViewDefinition"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/definition_text"
+            android:textAllCaps="false"
+            android:textColor="@color/textColorPrimary"/>
+    </LinearLayout>
 </RelativeLayout>
