@@ -51,6 +51,7 @@ import com.bulut.sleepbetter.youtube.SuggestionsLoader;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
@@ -191,6 +192,28 @@ public class MainPageActivity extends AppCompatActivity implements EasyPermissio
 
     }
 
+    public int randInt(int min, int max) {
+
+        // NOTE: This will (intentionally) not run as written so that folks
+        // copy-pasting have to think about how to initialize their
+        // Random instance.  Initialization of the Random instance is outside
+        // the main scope of the question, but some decent options are to have
+        // a field that is initialized once and then re-used as needed or to
+        // use ThreadLocalRandom (if using at least Java 1.7).
+        //
+        // In particular, do NOT do 'Random rand = new Random()' here or you
+        // will get not very good / not very random results.
+        //Random rand = new Random();
+
+        Log.d(TAG, "Maximum and min numbers are " + String.valueOf(max) + " " + String.valueOf(min));
+        // nextInt is normally exclusive of the top value,
+        // so add 1 to make it inclusive
+        //int randomNum = rand.nextInt((max - min) + 1) + min;
+        int randomNum = (int)(Math.random() * ((max - min) + 1)) + min;
+
+        return randomNum;
+    }
+
     public void runMusic(String listen_music, String music, Long length) {
         if (!networkConf.isNetworkAvailable()) {
             networkConf.createNetErrorDialog();
@@ -213,13 +236,17 @@ public class MainPageActivity extends AppCompatActivity implements EasyPermissio
             if (music.equals("ELECTRONICAL"))
                 videoURL = getString(R.string.electronical_list);
 
-            YouTubeVideo videoToPlay = new YouTubeVideo(videoURL,
+            String[] videoList = videoURL.split(",");
+            int randVideo = randInt(0, videoList.length-1);
+            String videoURLFinal = videoList[randVideo];
+
+            YouTubeVideo videoToPlay = new YouTubeVideo(videoURLFinal,
                     "SLEEP BETTER: " + music,
                     videoURL,
                     "SLEEP BETTER: " + music,
                     "SLEEP BETTER: " + music);
 
-            Log.d(TAG, "About to play url " + videoURL);
+            Log.d(TAG, "About to play url " + videoURLFinal);
             playlist.add(videoToPlay);
             Intent serviceIntent = new Intent(this, BackgroundAudioService.class);
             serviceIntent.setAction(BackgroundAudioService.ACTION_PLAY);

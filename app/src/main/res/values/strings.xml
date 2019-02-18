@@ -89,12 +89,12 @@
     <string name="failed_playback">Playback failed!</string>
     <string name="list_empty">List is empty!</string>
 
-    <string name="rock_list">hBDrBW1XI48</string>
-    <string name="pop_list">NLWqz0TI35o</string>
-    <string name="metal_list">BxDiQhNO780</string>
-    <string name="classical_list">4VjN9C7VZFw</string>
-    <string name="piano_list">mYMtxCGqty4</string>
-    <string name="electronical_list">GGY6zizgrYw</string>
+    <string name="rock_list">7jTyvm27EsE,W5ntNwS76WM,EpAyaAyWl-M,hBDrBW1XI48</string>
+    <string name="pop_list">1ZYbU82GVz4,GwLe50pRnxE,coTD9NpPR2E,NLWqz0TI35o</string>
+    <string name="metal_list">H-W55-Srmx4,BxDiQhNO780</string>
+    <string name="classical_list">VszFB1v5qbY,178rTrGB-5w,4VjN9C7VZFw</string>
+    <string name="piano_list">857bt64SomQ,58GQx4xEdlY,lCOF9LN_Zxs,WI1xExDWVF0,Cnfj6QCGLyA,mYMtxCGqty4</string>
+    <string name="electronical_list">bDZ0eUk4E10,RPnbS2o-tqU,GGY6zizgrYw</string>
     <string name="best_rock_list">y8OtzJtp-EM</string>
 
     <string name="spinner0_title">Listen Music Tonight</string>

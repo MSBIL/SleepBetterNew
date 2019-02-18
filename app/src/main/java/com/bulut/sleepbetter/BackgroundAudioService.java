@@ -32,6 +32,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.media.RatingCompat;
+import android.support.v4.media.VolumeProviderCompat;
 import android.support.v4.media.app.NotificationCompat.MediaStyle;
 import android.support.v4.media.session.MediaControllerCompat;
 import android.support.v4.media.session.MediaSessionCompat;
@@ -286,6 +287,38 @@ public class BackgroundAudioService extends Service implements MediaPlayer.OnCom
 		} catch (RemoteException re) {
 			re.printStackTrace();
 		}
+
+		/*
+		final VolumeProviderCompat volumeProviderCompat = new VolumeProviderCompat(VolumeProviderCompat.VOLUME_CONTROL_ABSOLUTE, 100, 100) {
+			@Override
+			public void onAdjustVolume(int direction) {
+				Log.i(TAG, "onAdjustVolume " + direction);
+				if (direction > 0) {
+					setCurrentVolume(getCurrentVolume() + 5);
+				} else if (direction < 0) {
+					setCurrentVolume(getCurrentVolume() - 5);
+				}
+			}
+
+			@Override
+			public void onSetVolumeTo(int volume) {
+				super.onSetVolumeTo(volume);
+				Log.i(TAG, "onSetVolumeTo " + volume);
+			}
+		};
+		volumeProviderCompat.setCallback(new VolumeProviderCompat.Callback() {
+			@Override
+			public void onVolumeChanged(VolumeProviderCompat volumeProvider) {
+				int currentVolume = volumeProvider.getCurrentVolume();
+				Log.i(TAG,"onVolumeChanged " + currentVolume);
+			}
+		});
+
+*/
+		//mSession.setFlags(MediaSessionCompat.FLAG_HANDLES_MEDIA_BUTTONS);
+		//mSession.setPlaybackToLocal(AudioManager.STREAM_MUSIC);
+		//mSession.setPlaybackToRemote(volumeProviderCompat);
+
 	}
 
 	/**
