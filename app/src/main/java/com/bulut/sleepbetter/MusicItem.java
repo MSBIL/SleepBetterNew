@@ -5,7 +5,7 @@ public class MusicItem {
     private String user;
     private String title;
     private String answerOne;
-    private String answerTwo, answerThree;
+    private String answerTwo, answerThree, answerFour;
 
     public MusicItem() {}
     public String getTitle() {
@@ -44,17 +44,27 @@ public class MusicItem {
         this.answerThree = answerThree;
     }
 
+    public String getAnswerFour() {
+        return answerFour;
+    }
+    public void setAnswerFour(String answerFour) {
+        this.answerFour = answerFour;
+    }
+
+
     public MusicItem(
                              String title,
                              String user,
                              String answerOne,
                              String answerTwo,
-                             String answerThree) {
+                             String answerThree,
+                             String answerFour) {
         this.title = title;
         this.user = user;
         this.answerOne = answerOne;
         this.answerTwo = answerTwo;
         this.answerThree = answerThree;
+        this.answerFour = answerFour;
     }
 
     /*

@@ -27,6 +27,7 @@ import android.widget.TextView;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.util.Date;
 import com.bulut.sleepbetter.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -450,6 +451,7 @@ public class MainPageActivity extends AppCompatActivity implements EasyPermissio
                 String listen_music = String.valueOf(spinner0_in.getSelectedItem());
                 String music = String.valueOf(spinner1_in.getSelectedItem());
                 String str_length = String.valueOf(spinner2_in.getSelectedItem());
+                String timeStamp = new java.text.SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new java.util.Date());
                 Long length = Long.parseLong(str_length);
                 Log.d(TAG, "Following items selected " +
                         String.valueOf(spinner0_in.getSelectedItem()) + " " +
@@ -457,7 +459,7 @@ public class MainPageActivity extends AppCompatActivity implements EasyPermissio
                         String.valueOf(spinner2_in.getSelectedItem())
                        );
 
-                MusicItem item = new MusicItem(mUserId, mUserId, listen_music, music, str_length);
+                MusicItem item = new MusicItem(mUserId, mUserId, listen_music, music, str_length, timeStamp);
                 mDatabase.child("users").child(mUserId).child("sleep_better_tonight").push().setValue(item);
 
                 runSleepBetter(listen_music, music, length);
